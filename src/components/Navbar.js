@@ -15,7 +15,7 @@ function Navbar() {
 
       {isLoggedIn && (
         <>
-          <Link to="/dasboard">
+          <Link to="/dashboard">
             <button>Dashboard</button>
           </Link>
         

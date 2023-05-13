@@ -4,9 +4,13 @@ import './App.css';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 import Navbar from "./components/Navbar";
-//import Dashboard from './components/Dashboard';
-//import IsPrivate from './components/IsPrivate';
+import Dashboard from './components/Dashboard';
+import IsPrivate from './components/IsPrivate';
 import IsAnon from './components/IsAnon';
+import IncomeList from './components/IncomeList';
+import ExpenseList from './components/ExpenseList';
+import Balance from './components/Balance';
+import IncomeForm from './components/IncomeForm';
 
 
 
@@ -17,9 +21,14 @@ function App() {
       <Navbar />
     
         <Routes>
-          <Route path="/" element={<Navigate to="/auth/login" />} />
+          <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/auth/signup" element={<IsAnon><SignUpPage /></IsAnon>} />
           <Route path="/auth/login" element={<IsAnon><LoginPage /></IsAnon>} />
+          <Route path="/dashboard" element={<IsPrivate><Dashboard /></IsPrivate>} />
+          <Route path="/income" element={<IsPrivate><IncomeList /></IsPrivate>} />
+          <Route path="/income/new" element={<IsPrivate><IncomeForm /></IsPrivate>} />
+          <Route path="/expense" element={<IsPrivate><ExpenseList /></IsPrivate>} />
+          <Route path="/balance" element={<IsPrivate><Balance /></IsPrivate>} />
           
           
         </Routes>
