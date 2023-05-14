@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
 
-function IncomeForm() {
+function ExpenseForm() {
   const { user } = useContext(AuthContext);
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
@@ -16,7 +16,7 @@ function IncomeForm() {
     const authToken = localStorage.getItem('authToken');
 
     try {
-      const response = await axios.post('/income', {
+      const response = await axios.post('/expense', {
         category,
         amount,
         date,
@@ -35,10 +35,10 @@ function IncomeForm() {
         setDate('');
         setCurrency('');
         setDescription('');
-        alert('Income saved successfully');
+        alert('Expense saved successfully');
       }
     } catch (error) {
-      console.error('Failed to save income', error);
+      console.error('Failed to save expense', error);
     }
   };
 
@@ -74,4 +74,5 @@ function IncomeForm() {
   );
 }
 
-export default IncomeForm;
+export default ExpenseForm;
+ 
