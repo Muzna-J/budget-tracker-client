@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ExpenseForm from './ExpenseForm'; // Import the ExpenseForm component
+import ExpenseForm from './ExpenseForm'; 
+import { Link } from 'react-router-dom';
 
 function ExpenseList() {
   const [expenses, setExpenses] = useState([]);
@@ -56,6 +57,9 @@ function ExpenseList() {
   return (
     <div>
       <h2>Expense List</h2>
+      <Link to="/expense/new">
+        <button type="button" className="btn btn-primary mb-3">Add New Expense</button>
+      </Link>
       <ul>
         {expenses.map((expense) => (
           <li key={expense._id}>

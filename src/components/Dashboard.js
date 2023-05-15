@@ -4,6 +4,7 @@ import { AuthContext } from '../context/auth.context';
 import { Pie } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {Chart, ArcElement} from 'chart.js'
+import { Link } from 'react-router-dom';
 
 
 function Dashboard() {
@@ -100,6 +101,12 @@ function Dashboard() {
         <p>Total Income: {totalIncome}</p>
         <p>Total Expense: {totalExpense}</p>
         <p>Net Income: {netIncome}</p>
+        <Link to="/income">
+          <button type="button" className="btn btn-primary mr-2">Income List</button>
+        </Link>
+        <Link to="/expense">
+          <button type="button" className="btn btn-primary">Expense List</button>
+        </Link>
       </div>
       <div className="col-md-6">
         <div className="chart-container">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import IncomeForm from './IncomeForm';
+import { Link } from 'react-router-dom';
 
 function IncomeList() {
   const [incomes, setIncomes] = useState([]);
@@ -48,6 +49,9 @@ function IncomeList() {
   return (
     <div>
       <h2>Income List</h2>
+      <Link to="/income/new">
+        <button type="button" className="btn btn-primary mb-3">Add New Income</button>
+      </Link>
       <ul>
         {incomes.map(income => (
           <li key={income._id}>
