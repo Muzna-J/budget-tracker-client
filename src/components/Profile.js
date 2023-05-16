@@ -179,23 +179,35 @@ function Profile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const authToken = localStorage.getItem('authToken');
+
+
     try {
-      const response = await axios.put('/profile', user, {
+      const response = await axios.put('/profile', {name: user.name, email: user.email}, 
+      {
         headers: {
           'Authorization': `Bearer ${authToken}`,
         },
       });
+
       if (response.status === 200) {
-        authContext.updateUser(response.data); // update the context user
-        setUser(response.data);
-        console.log(user);
+        const updatedUser = response.data.user;
+        const newAuthToken = response.data.authToken;
+        localStorage.setItem('authToken', newAuthToken);
+        authContext.updateUser(updatedUser);
+        
+        setUser(updatedUser);
         setEditing(false);
         alert('Profile updated successfully!');
       }
     } catch (error) {
-      console.error(error);
-    }
-  };
+      if(error.response && error.response.data && error.response.data.message) {
+        console.log(error.response.data.message);
+      } else {
+        console.log('Error updating profile');
+      }
+      }
+    };
+
 
   const handleInputChange = (event) => {
     setUser({
