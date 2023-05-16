@@ -6,6 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 function NavBar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
+  
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <LinkContainer to="/">
