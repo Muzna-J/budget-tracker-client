@@ -30,23 +30,22 @@ function Login() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </label>
+    <form onSubmit={handleSubmit} className="form-group">
+      <label>
+        Email:
+        <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
+      </label>
+      <label>
+      Password:
+      <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
+    </label>
 
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
+    <input type="submit" className="btn btn-primary" value="Log In" />
+  </form>
 
-        <input type="submit" value="Log In" />
-      </form>
-
-      {error && <p>{error}</p>}
-    </div>
-  );
+  {error && <p className="text-danger">{error}</p>}
+</div>
+);
 }
 
 export default Login;

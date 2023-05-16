@@ -3,31 +3,46 @@ import { useContext } from "react";
 import { AuthContext } from "./../context/auth.context";
 
 function Navbar() {
-  // Subscribe to the AuthContext to gain access to
-  // the values from AuthContext.Provider `value` prop
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-
-  return (
-    <nav>
-      {isLoggedIn && (
-        <>
-          <Link to="/dashboard">
-            <button>Dashboard</button>
-          </Link>
-        
-          <button onClick={logOutUser}>Logout</button>
-          <span>{user && user.name}</span>
-        </>
-      )}
-
-      {!isLoggedIn && (
-        <>
-          <Link to="/auth/signup"> <button>Sign Up</button> </Link>
-          <Link to="/auth/login"> <button>Login</button> </Link>
-        </>
-      )}      
-    </nav>
-  );
-}
-
-export default Navbar;
+    return (
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        {isLoggedIn && (
+          <>
+            <Link className="navbar-brand" to="/dashboard">Dashboard</Link>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/income">Incomes</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/expense">Expenses</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/profile">Profile</Link>
+                </li>
+                <li className="nav-item">
+                  <button className="nav-link btn btn-link" onClick={logOutUser}>Logout</button>
+                </li>
+              </ul>
+            </div>
+          </>
+        )}
+  
+        {!isLoggedIn && (
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link className="nav-link" to="/auth/signup">Sign Up</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/auth/login">Login</Link>
+              </li>
+            </ul>
+          </div>
+        )}      
+      </nav>
+    );
+  }
+  
+  export default Navbar;
+  

@@ -92,7 +92,7 @@ function Dashboard() {
   };
 
 
-  return (
+return (
   <div className="container">
     <h1 className="mb-4">Welcome to the Dashboard</h1>
     <h2>Hello, {user.name}!</h2>
@@ -101,15 +101,6 @@ function Dashboard() {
         <p>Total Income: {totalIncome}</p>
         <p>Total Expense: {totalExpense}</p>
         <p>Balance: {Balance}</p>
-        <Link to="/income">
-          <button type="button" className="btn btn-primary mr-2">Income List</button>
-        </Link>
-        <Link to="/expense">
-          <button type="button" className="btn btn-primary">Expense List</button>
-        </Link>
-        <Link to="/profile">
-          <button type="button" className="btn btn-primary">Profile</button>
-        </Link>
       </div>
       <div className="col-md-6">
         <div className="chart-container">

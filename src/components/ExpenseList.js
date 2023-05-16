@@ -55,30 +55,35 @@ function ExpenseList() {
   };
 
   return (
-    <div>
-      <h2>Expense List</h2>
-      <Link to="/expense/new">
-        <button type="button" className="btn btn-primary mb-3">Add New Expense</button>
-      </Link>
-      <ul>
-        {expenses.map((expense) => (
-          <li key={expense._id}>
-            {expense.category}: {expense.amount} {expense.currency}
-            <button onClick={() => handleEdit(expense)}>Edit</button>
-            <button onClick={() => handleDelete(expense._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      {editingExpense && (
-        <ExpenseForm 
-          expense={editingExpense} 
-          handleUpdate={handleUpdate}
-          cancelUpdate={() => setEditingExpense(null)}
-        />
-      )}
-    </div>
-  );
-}
+      <div className="container">
+        <h2 className="mb-3">Expense List</h2>
+        <Link to="/expense/new">
+          <button type="button" className="btn btn-primary mb-3">Add New Expense</button>
+        </Link>
+        <ul className="list-group">
+          {expenses.map((expense) => (
+            <li key={expense._id} className="list-group-item d-flex justify-content-between align-items-center">
+              {expense.category}: {expense.amount} {expense.currency}
+              <div>
+                <button onClick={() => handleEdit(expense)} className="btn btn-info btn-sm mr-2">Edit</button>
+                <button onClick={() => handleDelete(expense._id)} className="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+        {editingExpense && (
+          <div className="mt-3">
+            <ExpenseForm 
+              expense={editingExpense} 
+              handleUpdate={handleUpdate}
+              cancelUpdate={() => setEditingExpense(null)}
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
+    
 
 export default ExpenseList;
 

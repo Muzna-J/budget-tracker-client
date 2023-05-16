@@ -75,22 +75,22 @@ function IncomeForm({ income, onFinish }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form-group">
       <label>
         Category:
-        <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} required />
+        <input type="text" className="form-control" value={category} onChange={(e) => setCategory(e.target.value)} required />
       </label>
       <label>
         Amount:
-        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} required />
+        <input type="number" className="form-control" value={amount} onChange={(e) => setAmount(e.target.value)} required />
       </label>
       <label>
         Date:
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+        <input type="date" className="form-control" value={date} onChange={(e) => setDate(e.target.value)} required />
       </label>
       <label>
         Currency:
-        <select value={currency} onChange={(e) => setCurrency(e.target.value)} required>
+        <select className="form-control" value={currency} onChange={(e) => setCurrency(e.target.value)} required>
           <option value="">--Please choose an option--</option>
           <option value="USD">USD</option>
           <option value="EUR">EUR</option>
@@ -99,9 +99,9 @@ function IncomeForm({ income, onFinish }) {
       </label>
       <label>
         Description:
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+        <textarea className="form-control" value={description} onChange={(e) => setDescription(e.target.value)} />
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" className="btn btn-primary">Submit</button>
     </form>
   );
 }
