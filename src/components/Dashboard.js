@@ -53,14 +53,14 @@ function Dashboard() {
 
   const totalIncome = incomes.reduce((total, income) => total + income.amount, 0);
   const totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0);
-  const netIncome = totalIncome - totalExpense;
+  const Balance = totalIncome - totalExpense;
 
   // Prepare data for the chart
   const chartData = {
     labels: ['Income', 'Expense', 'Net Income'],
     datasets: [
       {
-        data: [totalIncome, totalExpense, netIncome],
+        data: [totalIncome, totalExpense, Balance],
         backgroundColor: [
           'rgba(75, 192, 192, 0.6)', // Income color
           'rgba(255, 99, 132, 0.6)', // Expense color
@@ -100,7 +100,7 @@ function Dashboard() {
       <div className="col-md-6">
         <p>Total Income: {totalIncome}</p>
         <p>Total Expense: {totalExpense}</p>
-        <p>Net Income: {netIncome}</p>
+        <p>Balance: {Balance}</p>
         <Link to="/income">
           <button type="button" className="btn btn-primary mr-2">Income List</button>
         </Link>

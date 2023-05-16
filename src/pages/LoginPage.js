@@ -28,7 +28,9 @@ function LoginPage(props) {
         // console.log("JWT token", response.data.authToken);
         
         storeToken(response.data.authToken);
-        authenticateUser();
+        return authenticateUser();
+      })
+      .then(() => {
         navigate("/dashboard");
       })
       .catch((error) => {

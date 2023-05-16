@@ -27,7 +27,7 @@ function AuthProviderWrapper(props) {
       //  { headers: { Authorization: `Bearer ${storedToken}`} }
       // )
 
-      authService.verify()
+      return authService.verify()
         .then((response) => {
           const user = response.data;
         // Update state variables        
@@ -48,7 +48,9 @@ function AuthProviderWrapper(props) {
       setIsLoggedIn(false);
       setIsLoading(false);
       setUser(null);
+      return Promise.resolve();
     }
+
   }
 
   const removeToken = () => {
