@@ -1,48 +1,54 @@
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./../context/auth.context";
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
-function Navbar() {
+function NavBar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-    return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+
+  return (
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <LinkContainer to="/">
+        <Navbar.Brand>MyApp</Navbar.Brand>
+      </LinkContainer>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
         {isLoggedIn && (
-          <>
-            <Link className="navbar-brand" to="/dashboard">Dashboard</Link>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <Link className="nav-link" to="/income">Incomes</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/expense">Expenses</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/profile">Profile</Link>
-                </li>
-                <li className="nav-item">
-                  <button className="nav-link btn btn-link" onClick={logOutUser}>Logout</button>
-                </li>
-              </ul>
-            </div>
-          </>
+          <Nav className="mr-auto">
+            <LinkContainer to="/dashboard">
+              <Nav.Link>Dashboard</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/incomes">
+              <Nav.Link>Incomes</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/expenses">
+              <Nav.Link>Expenses</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/profile">
+              <Nav.Link>Profile</Nav.Link>
+            </LinkContainer>
+            <Nav.Link onClick={logOutUser}>Logout</Nav.Link>
+          </Nav>
         )}
-  
+
         {!isLoggedIn && (
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link className="nav-link" to="/auth/signup">Sign Up</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/auth/login">Login</Link>
-              </li>
-            </ul>
-          </div>
-        )}      
-      </nav>
-    );
-  }
-  
-  export default Navbar;
-  
+          <Nav className="mr-auto">
+            <LinkContainer to="/auth/signup">
+              <Nav.Link>Sign Up</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/auth/login">
+              <Nav.Link>Login</Nav.Link>
+            </LinkContainer>
+          </Nav>
+        )}
+        <Nav>
+          <Navbar.Text>
+            {user && user.name}
+          </Navbar.Text>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+}
+
+export default NavBar;
