@@ -9,6 +9,7 @@ function IncomeForm({ income, onFinish }) {
   const [date, setDate] = useState(income ? income.date : '');
   const [currency, setCurrency] = useState(income ? income.currency : '');
   const [description, setDescription] = useState(income ? income.description : '');
+  
 
   useEffect(() => {
     if (income) {
@@ -106,3 +107,5 @@ function IncomeForm({ income, onFinish }) {
 }
 
 export default IncomeForm;
+
+

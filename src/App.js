@@ -12,6 +12,7 @@ import ExpenseList from './components/ExpenseList';
 import Balance from './components/Balance';
 import IncomeForm from './components/IncomeForm';
 import ExpenseForm from './components/ExpenseForm';
+import Category from './components/Category';
 
 
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/expense/new" element={<IsPrivate><ExpenseForm /></IsPrivate>} />
           <Route path="/expense" element={<IsPrivate><ExpenseList /></IsPrivate>} />
           <Route path="/balance" element={<IsPrivate><Balance /></IsPrivate>} />
+          <Route path="/category" element={<IsPrivate><Category /></IsPrivate>} />
           
           
         </Routes>
