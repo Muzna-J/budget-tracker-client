@@ -107,6 +107,9 @@ function Dashboard() {
         <Link to="/expense">
           <button type="button" className="btn btn-primary">Expense List</button>
         </Link>
+        <Link to="/profile">
+          <button type="button" className="btn btn-primary">Profile</button>
+        </Link>
       </div>
       <div className="col-md-6">
         <div className="chart-container">

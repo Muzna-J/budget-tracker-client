@@ -13,6 +13,7 @@ import Balance from './components/Balance';
 import IncomeForm from './components/IncomeForm';
 import ExpenseForm from './components/ExpenseForm';
 import Category from './components/Category';
+import Profile from './components/Profile';
 
 
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/expense" element={<IsPrivate><ExpenseList /></IsPrivate>} />
           <Route path="/balance" element={<IsPrivate><Balance /></IsPrivate>} />
           <Route path="/category" element={<IsPrivate><Category /></IsPrivate>} />
+          <Route path="/profile" element={<IsPrivate><Profile /></IsPrivate>} />
           
           
         </Routes>
