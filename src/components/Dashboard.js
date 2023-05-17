@@ -3,8 +3,10 @@ import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
 import { Pie } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import {Chart, ArcElement} from 'chart.js'
-import { Link } from 'react-router-dom';
+import { Chart, ArcElement } from 'chart.js';
+import { Card } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoneyBillWave, faShoppingCart, faWallet } from '@fortawesome/free-solid-svg-icons';
 
 
 function Dashboard() {
@@ -57,14 +59,14 @@ function Dashboard() {
 
   // Prepare data for the chart
   const chartData = {
-    labels: ['Income', 'Expense', 'Net Income'],
+    labels: ['Income', 'Expense', 'Balance'],
     datasets: [
       {
         data: [totalIncome, totalExpense, Balance],
         backgroundColor: [
           'rgba(75, 192, 192, 0.6)', // Income color
           'rgba(255, 99, 132, 0.6)', // Expense color
-          'rgba(54, 162, 235, 0.6)', // Net Income color
+          'rgba(54, 162, 235, 0.6)', // Balance color
         ],
         borderColor: [
           'rgba(75, 192, 192, 1)',
@@ -90,26 +92,57 @@ function Dashboard() {
       },
     },
   };
+  
+  return (
+    <div className="container">
 
-
-return (
-  <div className="container">
-    <h1 className="mb-4">Welcome to the Dashboard</h1>
-    <h2>Hello, {user.name}!</h2>
-    <div className="row">
-      <div className="col-md-6">
-        <p>Total Income: {totalIncome}</p>
-        <p>Total Expense: {totalExpense}</p>
-        <p>Balance: {Balance}</p>
+    <h1 className="mb-4 mt-5">Welcome to your Dashboard, {user.name}!</h1>
+      
+      <div className="row justify-content-center">
+        <div className="col-lg-4">
+          <Card className="mb-3" style={{backgroundColor: "#c3e6cb"}}>
+            <Card.Body>
+              <Card.Title><FontAwesomeIcon icon={faMoneyBillWave} /> Total Income</Card.Title>
+              <Card.Text>{totalIncome}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+  
+        <div className="col-lg-4">
+          <Card className="mb-3" style={{backgroundColor: "#f5c6cb"}}>
+            <Card.Body>
+              <Card.Title><FontAwesomeIcon icon={faShoppingCart} /> Total Expense</Card.Title>
+              <Card.Text>{totalExpense}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
       </div>
-      <div className="col-md-6">
-        <div className="chart-container">
+  
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <Card className="mb-3" style={{backgroundColor: "#ffeeba"}}>
+            <Card.Body>
+              <Card.Title><FontAwesomeIcon icon={faWallet} /> Balance</Card.Title>
+              <Card.Text>{Balance}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
+  
+      <div className="row justify-content-center mt-3">
+      <div className="col-lg-10">
+        <div className="chart-container" style={{ height: '300px' }}>
           <Pie data={chartData} options={chartOptions} plugins={[ChartDataLabels]} />
+        </div>
         </div>
       </div>
     </div>
-  </div>
-);
-}
+  );
+  }
+  
+
+  
+  
+  
 
 export default Dashboard;

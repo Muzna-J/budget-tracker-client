@@ -8,9 +8,9 @@ function NavBar() {
 
   
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" variant="dark" style={{ backgroundColor: '#006c75' }}>
       <LinkContainer to="/">
-        <Navbar.Brand>MyApp</Navbar.Brand>
+        <Navbar.Brand>SpendSmart</Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
@@ -19,10 +19,10 @@ function NavBar() {
             <LinkContainer to="/dashboard">
               <Nav.Link>Dashboard</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/incomes">
+            <LinkContainer to="/income">
               <Nav.Link>Incomes</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/expenses">
+            <LinkContainer to="/expense">
               <Nav.Link>Expenses</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/profile">
@@ -42,11 +42,7 @@ function NavBar() {
             </LinkContainer>
           </Nav>
         )}
-        <Nav>
-          <Navbar.Text>
-            {user && user.name}
-          </Navbar.Text>
-        </Nav>
+        
       </Navbar.Collapse>
     </Navbar>
   );

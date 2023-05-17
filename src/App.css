@@ -7,6 +7,7 @@
   pointer-events: none;
 }
 
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -37,3 +38,14 @@
   }
 }
 
+.card-income {
+  background-color: #c3e6cb; /* You can replace this with any color you like */
+}
+
+.card-expense {
+  background-color: #f5c6cb; /* You can replace this with any color you like */
+}
+
+.card-balance {
+  background-color: #ffeeba; /* You can replace this with any color you like */
+}

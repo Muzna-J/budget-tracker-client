@@ -47,35 +47,52 @@ function IncomeList() {
   };
 
 
+
   return (
-      <div className="container">
-        <h2 className="mb-3">Income List</h2>
-        <Link to="/income/new">
-          <button type="button" className="btn btn-primary mb-3">Add New Income</button>
-        </Link>
-        <ul className="list-group">
-          {incomes.map(income => (
-            <li key={income._id} className="list-group-item d-flex justify-content-between align-items-center">
-              {income.category}: {income.amount} {income.currency}
-              <div>
-                <button onClick={() => handleEdit(income)} className="btn btn-info btn-sm mr-2">Edit</button>
-                <button onClick={() => handleDelete(income._id)} className="btn btn-danger btn-sm">Delete</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-  
-        {editingIncome && (
-          <div className="mt-3">
-            <h2>Edit Income</h2>
-            <IncomeForm income={editingIncome} onFinish={() => { 
-              fetchIncomeData();
-              setEditingIncome(null); }} />
-            <button onClick={() => setEditingIncome(null)} className="btn btn-secondary mt-2">Cancel</button>
-          </div>
-        )}
+    <div className="container" style={{ paddingTop: '80px' }}>
+      <h2 className="mb-3">Income List</h2>
+      <Link to="/income/new">
+        <button type="button" className="btn" style={{ color: 'white', backgroundColor: '#e76e50', marginTop: '20px' }}>Add New Income</button>
+      </Link>
+      <div className="card mx-auto" style={{ maxWidth: '800px', backgroundColor: '#82c4be', marginTop: '20px' }}>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>Currency</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {incomes.map(income => (
+              <tr key={income._id}>
+                <td>{income.category}</td>
+                <td>{income.amount}</td>
+                <td>{income.currency}</td>
+                <td>{new Date(income.date).toLocaleDateString('en-GB')}</td>
+                <td>
+                  <button onClick={() => handleEdit(income)} className="btn btn-sm mr-2" style={{ color: 'white', backgroundColor: '#006c75' }}>Edit</button>
+                  <button onClick={() => handleDelete(income._id)} className="btn btn-danger btn-sm" style={{ backgroundColor: '#yourBackgroundColor', color: '#yourTextColor', marginLeft: '4px' }}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    );
-  }
-    
+
+      {editingIncome && (
+        <div className="mt-3">
+          <h2>Edit Income</h2>
+          <IncomeForm income={editingIncome} onFinish={() => {
+            fetchIncomeData();
+            setEditingIncome(null);
+          }} />
+          <button onClick={() => setEditingIncome(null)} className="btn btn-secondary mt-2">Cancel</button>
+        </div>
+      )}
+    </div>
+  );
+}    
 export default IncomeList;
