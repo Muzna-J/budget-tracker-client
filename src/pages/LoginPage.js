@@ -57,14 +57,14 @@ return (
             <Form.Control type="password" name="password" value={password} onChange={handlePassword} required />
           </Form.Group>
 
-          <Button style={{ backgroundColor: '#e76e50', borderColor: '#123456' }} className="btn" type="submit">Login</Button>
+          <Button style={{ backgroundColor: '#e76e50', borderColor: '#123456' }} className="btn mt-3" type="submit">Login</Button>
         </Form>
 
         { errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert> }
         
         <div className="w-100 text-center mt-3">
           <p>Don't have an account yet?</p>
-          <Link to={"/signup"}> Sign Up</Link>
+          <Link to={"/auth/signup"} style={{ backgroundColor: '#006c75', borderColor: '#123456', color: '#ffffff', textDecoration: 'none', padding: '10px 20px', borderRadius: '5px' }}>Sign Up</Link>
         </div>
 
       </Card.Body>
