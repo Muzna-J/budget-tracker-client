@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../context/auth.context';
+import React from 'react';
+//import { AuthContext } from '../context/auth.context';
 import Dashboard from '../components/Dashboard';
 import { Container, Navbar, NavbarBrand, Footer } from 'react-bootstrap';
 
 function DashboardPage() {
-  const { user } = useContext(AuthContext);
+  //const { user } = useContext(AuthContext);
 
   return (
     <>
@@ -16,9 +16,9 @@ function DashboardPage() {
         <Dashboard />
       </Container>
 
-      {/* <Footer style={{ textAlign: 'center', padding: '10px 0', background: '#f8f9fa' }}>
+      <Footer style={{ textAlign: 'center', padding: '10px 0', background: '#f8f9fa' }}>
         SpendSmart ©2023 Created by Muzna.
-      </Footer> */}
+      </Footer>
     </>
   );
 }

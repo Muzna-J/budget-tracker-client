@@ -8,7 +8,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const { isLoggedIn, logInUser } = useContext(AuthContext);
+  const { logInUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
