@@ -15,6 +15,10 @@ function Dashboard() {
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [totalExpense, setTotalExpense] = useState(0);
+  const [balance, setBalance] = useState(0);
+
   Chart.register(ArcElement);
 
 
@@ -42,8 +46,25 @@ function Dashboard() {
       }
     };
 
+
     fetchIncomeAndExpense();
   }, [user]);
+
+  useEffect(() => {
+    if (incomes.length > 0) {
+      const total = incomes.reduce((total, income) => total + income.amount, 0);
+      setTotalIncome(total)
+    }
+
+    if (expenses.length> 0) {
+      const total = expenses.reduce((total, expense) => total + expense.amount, 0);
+      setTotalExpense(total)
+    }
+
+    setBalance(totalIncome - totalExpense);
+  }, [incomes, expenses])
+
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -53,26 +74,16 @@ function Dashboard() {
     return <div>Error: {error}</div>;
   }
 
-  let totalIncome = 0
-  let totalExpense = 0
-  let Balance = 0
 
-  if (incomes.length === 0) {
-    totalIncome = incomes.reduce((total, income) => total + income.amount, 0);
-  }
 
-  if (expenses.length === 0) {
-    totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0);
-  }
 
-  Balance = totalIncome - totalExpense;
 
   // Prepare data for the chart
   const chartData = {
     labels: ['Income', 'Expense', 'Balance'],
     datasets: [
       {
-        data: [totalIncome, totalExpense, Balance],
+        data: [totalIncome, totalExpense, balance],
         backgroundColor: [
           'rgba(75, 192, 192, 0.6)', // Income color
           'rgba(255, 99, 132, 0.6)', // Expense color
@@ -133,7 +144,7 @@ function Dashboard() {
           <Card className="mb-3" style={{backgroundColor: "#ffeeba"}}>
             <Card.Body>
               <Card.Title><FontAwesomeIcon icon={faWallet} /> Balance</Card.Title>
-              <Card.Text>{Balance}</Card.Text>
+              <Card.Text>{balance}</Card.Text>
             </Card.Body>
           </Card>
         </div>
