@@ -264,7 +264,8 @@ function ExpenseList() {
                 </tr>
                 <tr>
                   <td colSpan="4" className="no-border">
-                    <button type="submit" className="btn btn-primary" disabled={isUpdating}>
+                  
+                    <button type="submit" style={{ color: 'white', backgroundColor: '#e76e50', marginRight: '5px' }} className="btn" disabled={isUpdating}>
 {isUpdating ? 'Updating...' : 'Submit'}
                     </button>
                     <button onClick={() => setEditingExpense(null)} className="btn btn-secondary" disabled={isUpdating}>

@@ -21,7 +21,7 @@ function SignupPage(props) {
 
     authService.signup(requestBody)
       .then((response) => {
-        navigate("/login");
+        navigate("/auth/login");
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
