@@ -53,9 +53,19 @@ function Dashboard() {
     return <div>Error: {error}</div>;
   }
 
-  const totalIncome = incomes.reduce((total, income) => total + income.amount, 0);
-  const totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0);
-  const Balance = totalIncome - totalExpense;
+  let totalIncome = 0
+  let totalExpense = 0
+  let Balance = 0
+
+  if (incomes.length === 0) {
+    totalIncome = incomes.reduce((total, income) => total + income.amount, 0);
+  }
+
+  if (expenses.length === 0) {
+    totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0);
+  }
+
+  Balance = totalIncome - totalExpense;
 
   // Prepare data for the chart
   const chartData = {
