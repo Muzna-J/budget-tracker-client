@@ -20,7 +20,7 @@ function Login() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', { email, password });
+      const response = await axios.post(process.env.REACT_APP_API_URL+'/auth/login', { email, password });
       logInUser(response.data.authToken);
       navigate('/dashboard');
     } catch (error) {

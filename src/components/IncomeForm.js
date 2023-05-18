@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../context/auth.context';
+//import { AuthContext } from '../context/auth.context';
 
 function IncomeForm({ income, onFinish }) {
-  const { user } = useContext(AuthContext);
+  //const { user } = useContext(AuthContext);
   const [category, setCategory] = useState(income ? income.category : '');
   const [amount, setAmount] = useState(income ? income.amount : '');
   const [date, setDate] = useState(income ? income.date : '');

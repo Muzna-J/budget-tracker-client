@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../context/auth.context';
+//import { AuthContext } from '../context/auth.context';
 
 function CategoryComponent() {
-  const { user } = useContext(AuthContext);
+ // const { user } = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
   const [newCategoryName, setNewCategoryName] = useState('');
   const [categoryType, setCategoryType] = useState('income');
