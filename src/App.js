@@ -40,10 +40,12 @@ function App() {
           
         </Routes>
       
-      
-    </div>
-  
-  );
+      <footer style={{ textAlign: 'center', background: '#f8f9fa' }}>
+       SpendSmart ©2023 Created by Muzna.
+     </footer>
+   </div>
+ 
+ );
 }
 
 export default App;

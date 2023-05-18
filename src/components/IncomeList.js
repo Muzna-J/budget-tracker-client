@@ -136,8 +136,25 @@ function IncomeList() {
     }
   };
 
+
   const handleEdit = income => {
-    setEditingIncome(income);
+    const incomeToEdit = { ...income };
+  
+    // Convert date into required format yyyy-MM-dd
+    const date = new Date(incomeToEdit.date);
+    let day = date.getUTCDate(); // get the day as a number (1-31)
+    let month = date.getUTCMonth() + 1; // get the month as a number (0-11) + 1
+    let year = date.getUTCFullYear(); // get the year as a number
+  
+    // Add leading zeros if day or month is less than 10
+    day = day < 10 ? `0${day}` : day;
+    month = month < 10 ? `0${month}` : month;
+  
+    const formattedDate = `${year}-${month}-${day}`;  // combine year, month, day with hyphens
+  
+    incomeToEdit.date = formattedDate;
+    
+    setEditingIncome(incomeToEdit);
   };
 
   const handleInputChange = (e, incomeSetter) => {
