@@ -1,11 +1,22 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ExpenseForm from './ExpenseForm'; 
+import ExpenseForm from './ExpenseForm';
 import { Link } from 'react-router-dom';
 
 function ExpenseList() {
   const [expenses, setExpenses] = useState([]);
   const [editingExpense, setEditingExpense] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const [newExpense, setNewExpense] = useState({
+    category: '',
+    amount: '',
+    date: new Date().toLocaleDateString('en-GB').split('/').join('.'),
+    currency: '',
+    description: '',
+  });
 
   useEffect(() => {
     fetchExpenseData();
@@ -30,6 +41,14 @@ function ExpenseList() {
     setEditingExpense(expense);
   };
 
+  const handleInputChange = (e, expenseSetter) => {
+    const { name, value } = e.target;
+    expenseSetter((prevExpense) => ({
+      ...prevExpense,
+      [name]: value,
+    }));
+  };
+
   const handleDelete = async (id) => {
     const authToken = localStorage.getItem('authToken');
     try {
@@ -38,66 +57,208 @@ function ExpenseList() {
           Authorization: `Bearer ${authToken}`,
         },
       });
-      // Refresh the list after delete
-      fetchExpenseData();
+
+      setExpenses(expenses.filter((expense) => expense._id !== id));
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleUpdate = (updatedExpense) => {
-    setExpenses(
-      expenses.map((expense) => 
-        expense._id === updatedExpense._id ? updatedExpense : expense
-      )
-    );
-    setEditingExpense(null);
+  const handleSubmit = async (e, expense, setter) => {
+    e.preventDefault();
+
+    const authToken = localStorage.getItem('authToken');
+    try {
+      setIsUpdating(true);
+
+      if (expense._id) {
+        await axios.put(`/expense/${expense._id}`, expense, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+      } else {
+        await axios.post('/expense', expense, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+      }
+
+      fetchExpenseData();
+      setter({
+        category: '',
+        amount: '',
+        date: new Date().toLocaleDateString('en-GB').split('/').join('.'),
+        currency: '',
+        description: '',
+      });
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
+  useEffect(() => {
+    if (isSubmitted) {
+      setEditingExpense(null);
+      setIsSubmitted(false);
+    }
+  }, [isSubmitted]);
+
   return (
-    <div className="container" style={{ paddingTop: '50px', paddingBottom: '50px' }}>
-      <h1 className="mb-3">Expense List</h1>
-      <Link to="/expense/new">
-      <button type="button" className="btn" style={{ color: 'white', backgroundColor: '#e76e50' , marginTop: '20px' }}>Add New Expense</button>
-      </Link>
-      <div className="card mx-auto" style={{ maxWidth: '800px' , backgroundColor: '#82c4be', marginTop: '20px'}}>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Currency</th>
-            <th>Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {expenses.map((expense) => (
-            <tr key={expense._id}>
-              <td>{expense.category}</td>
-              <td>{expense.amount}</td>
-              <td>{expense.currency}</td>
-              <td>{new Date(expense.date).toLocaleDateString('en-GB')}</td>
+    <div className="container" style={{ paddingTop: '50px', paddingBottom: '50px', minWidth: '60%' /*width: '40%'*/  }}  > 
+      <h2 className="mb-3">Expense List</h2>
 
-              <td>
-              <button onClick={() => handleEdit(expense)} className="btn btn-sm mr-2" style={{ color: 'white', backgroundColor: '#006c75' }}>Edit</button>
-              <button onClick={() => handleDelete(expense._id)} className="btn btn-danger btn-sm" style={{ backgroundColor: '#yourBackgroundColor', color: '#yourTextColor', marginLeft: '4px' }}>Delete</button>
-              </td>
-
+      <button
+        type="button"
+        className="btn"
+        style={{ color: 'white', backgroundColor: '#e76e50', marginTop: '20px' }}
+        onClick={() => setEditingExpense({})}
+      >
+        Add New Expense
+      </button>
+      <div className="card mx-auto" style={{ maxWidth: '800px', backgroundColor: '#82c4be', marginTop: '20px' }}>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Currency</th>
+              <th>Description</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {expenses.map((expense) => (
+              <tr key={expense._id}>
+                <td>{expense.category}</td>
+                <td>{expense.amount}</td>
+                <td>{new Date(expense.date).toLocaleDateString('en-GB')}</td>
+                <td>{expense.currency}</td>
+                <td>{expense.description}</td>
+                <td>
+                  <button
+                    onClick={() => handleEdit(expense)}
+                    className="btn btn-sm mr-2"
+                    style={{ color: 'white', backgroundColor: '#006c75' }}
+                  >
+                    Edit
+</button>
+                  <button
+                    onClick={() => handleDelete(expense._id)}
+                    className="btn btn-danger btn-sm"
+                    style={{ backgroundColor: '#yourBackgroundColor', color: '#yourTextColor', marginLeft: '4px' }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       {editingExpense && (
         <div className="mt-3">
-    <ExpenseForm 
-      expense={editingExpense} 
-      handleUpdate={handleUpdate}
-      cancelUpdate={() => setEditingExpense(null)}
-      date={editingExpense.date} // Pass the date as a prop
-    />
-  </div>
+          <h3>{editingExpense._id ? 'Edit Expense' : 'Add New Expense'}</h3>
+          <form onSubmit={(e) => handleSubmit(e, editingExpense, setEditingExpense)}>
+            <table className="table">
+              <tbody>
+                <tr>
+                  <td className="no-border">
+                    <label>Category:</label>
+                  </td>
+                  <td className="no-border">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="category"
+                      required
+                      value={editingExpense.category || ''}
+                      onChange={(e) => handleInputChange(e, setEditingExpense)}
+                      style={{ width: '55%' }}
+                    />
+                  </td>
+                  <td className="no-border">
+                    <label>Amount:</label>
+                  </td>
+                  <td className="no-border">
+                    <input
+                      type="number"
+                      className="form-control"
+                      name="amount"
+                      required
+                      value={editingExpense.amount || ''}
+                      onChange={(e) => handleInputChange(e, setEditingExpense)}
+                      style={{ width: '30%' }}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="no-border">
+                    <label>Date:</label>
+                  </td>
+                  <td className="no-border">
+                    <input
+                      type="date"
+                      className="form-control"
+                      name="date"
+                      required
+                      value={editingExpense.date || ''}
+                      onChange={(e) => handleInputChange(e, setEditingExpense)}
+                      style={{ width: '55%' }}
+                    />
+                  </td>
+                  <td className="no-border">
+                    <label>Currency:</label>
+                  </td>
+                  <td className="no-border">
+                    <select
+                      className="form-control"
+                      name="currency"
+                      required
+                      value={editingExpense.currency || ''}
+                      onChange={(e) => handleInputChange(e, setEditingExpense)}
+                      style={{ width: '30%' }}
+                    >
+                      <option value="">Please choose an option</option>
+                      <option value="USD">USD</option>
+                      <option value="EUR">EUR</option>
+                      <option value="JPY">JPY</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="no-border">
+                    <label>Description:</label>
+                  </td>
+                  <td className="no-border" colSpan="3">
+                    <textarea
+                      className="form-control"
+                      name="description"
+                      value={editingExpense.description || ''}
+                      onChange={(e) => handleInputChange(e, setEditingExpense)}
+                      style={{ width: '71.7%' }}
+                    ></textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="4" className="no-border">
+                    <button type="submit" className="btn btn-primary" disabled={isUpdating}>
+{isUpdating ? 'Updating...' : 'Submit'}
+                    </button>
+                    <button onClick={() => setEditingExpense(null)} className="btn btn-secondary" disabled={isUpdating}>
+                      Cancel
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
       )}
     </div>
   );

@@ -8,6 +8,9 @@
   pointer-events: none;
 }
 
+.no-border {
+  border: none;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

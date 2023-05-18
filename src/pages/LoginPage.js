@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/auth.context";
 import authService from "../services/auth.service";
+import { Container, Form, Button, Alert, Card, Row, Col } from 'react-bootstrap';
 
 
 function LoginPage(props) {
@@ -38,26 +39,37 @@ function LoginPage(props) {
       	setErrorMessage(errorDescription);
     	})
   };
-  
-  return (
-    <div className="LoginPage">
-      <h1>Login</h1>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+return (
+  <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+    <Card className="w-100" style={{ maxWidth: "400px", backgroundColor:' #82c4be' }}>
+      <Card.Body>
+        <h2 className="text-center mb-4">Login</h2>
 
-        <label>Password:</label>
-        <input type="password" name="password" value={password} onChange={handlePassword} />
+        <Form onSubmit={handleLoginSubmit}>
+          <Form.Group id="email">
+            <Form.Label><strong>Email:</strong></Form.Label>
+            <Form.Control type="email" name="email" value={email} onChange={handleEmail} required />
+          </Form.Group>
 
-        <button type="submit">Login</button>
-      </form>
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
+          <Form.Group id="password">
+            <Form.Label><strong>Password:</strong></Form.Label>
+            <Form.Control type="password" name="password" value={password} onChange={handlePassword} required />
+          </Form.Group>
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
-    </div>
-  )
+          <Button style={{ backgroundColor: '#e76e50', borderColor: '#123456' }} className="btn" type="submit">Login</Button>
+        </Form>
+
+        { errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert> }
+        
+        <div className="w-100 text-center mt-3">
+          <p>Don't have an account yet?</p>
+          <Link to={"/signup"}> Sign Up</Link>
+        </div>
+
+      </Card.Body>
+    </Card>
+  </Container>
+)
 }
-
 export default LoginPage;

@@ -80,21 +80,27 @@ function Dashboard() {
 
   // Prepare data for the chart
   const chartData = {
-    labels: ['Income', 'Expense', 'Balance'],
+    labels: ['Income', 'Expense'],
     datasets: [
       {
-        data: [totalIncome, totalExpense, balance],
+        data: [totalIncome, totalExpense],
         backgroundColor: [
-          'rgba(75, 192, 192, 0.6)', // Income color
+          'rgba(200, 230, 203, 0.6)', // Income color
           'rgba(255, 99, 132, 0.6)', // Expense color
-          'rgba(54, 162, 235, 0.6)', // Balance color
         ],
         borderColor: [
           'rgba(75, 192, 192, 1)',
           'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
+    
         ],
         borderWidth: 1,
+        datalabels: {
+          formatter: (value, ctx) => {
+            const percentage = ((value / ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0)) * 100).toFixed(2);
+            return `${percentage}%`;
+          },
+          color: 'black',
+        },
       },
     ],
   };
@@ -103,16 +109,13 @@ function Dashboard() {
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: {
-      datalabels: {
-        color: '#fff',
-        anchor: 'end',
-        align: 'start',
-        offset: 8,
-        formatter: (value) => `${value}%`,
+    layout: {
+      padding: {
+        bottom: 20, 
       },
     },
   };
+
   
   return (
     <div className="container">

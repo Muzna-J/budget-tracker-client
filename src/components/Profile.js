@@ -306,26 +306,26 @@ function Profile() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 56px)', paddingTop: '50px' }}>
-    <h1 className="mb-3" style={{marginBottom: '50px'}}>Welcome to your profile</h1>
-      <Card style={{ width: '30rem', backgroundColor:' #82c4be', marginTop: '20px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingTop: '50px' }}>
+    <h1 className="mb-3" style={{marginBottom: '60px', marginTop: '40px'}}>Welcome to your profile</h1>
+      <Card style={{ width: '30rem', height: '15rem', backgroundColor:' #82c4be', marginTop: '30px' }}>
         <Card.Body>
           {/* <Card.Title>Welcome to your profile</Card.Title> */}
           {editing ? (
             <Form onSubmit={handleSubmit}>
               <Form.Group>
                 <Form.Label style={{fontWeight: 'bold'}}>Name</Form.Label>
-                <Form.Control type="text" name="name" value={user.name} onChange={handleInputChange} />
+                <Form.Control type="text" name="name" value={user.name} onChange={handleInputChange} style={{backgroundColor: '#ecf5f9'}} />
               </Form.Group>
               <Form.Group>
                 <Form.Label style={{fontWeight: 'bold'}}>Email</Form.Label>
-                <Form.Control type="email" name="email" value={user.email} onChange={handleInputChange} />
+                <Form.Control type="email" name="email" value={user.email} onChange={handleInputChange} style={{backgroundColor: '#ecf5f9'}} />
               </Form.Group>
-              <Button variant="primary" type="submit">Save</Button>{' '}
-              <Button variant="secondary" type="button" onClick={handleCancel}>Cancel</Button>
+              <Button variant="primary" type="submit" style={{marginTop:'5px'}}>Save</Button>{' '}
+              <Button variant="secondary" type="button" style={{marginTop:'5px'}} onClick={handleCancel}>Cancel</Button>
             </Form>
           ) : (
-            <div>
+            <div  style={{marginTop:'30px'}}>
               <Card.Text><strong>Name:</strong> {user.name}</Card.Text>
               <Card.Text><strong>Email:</strong> {user.email}</Card.Text>
               <Button variant="primary" onClick={handleEdit}>Edit Profile</Button>
