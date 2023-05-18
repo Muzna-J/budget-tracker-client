@@ -49,7 +49,7 @@ function IncomeList() {
 
 
   return (
-    <div className="container" style={{ paddingTop: '80px' }}>
+    <div className="container" style={{ paddingTop: '50px', paddingBottom: '50px' }}>
       <h2 className="mb-3">Income List</h2>
       <Link to="/income/new">
         <button type="button" className="btn" style={{ color: 'white', backgroundColor: '#e76e50', marginTop: '20px' }}>Add New Income</button>

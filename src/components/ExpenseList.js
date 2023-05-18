@@ -55,12 +55,12 @@ function ExpenseList() {
   };
 
   return (
-    <div className="container" style={{ paddingTop: '80px' }}>
+    <div className="container" style={{ paddingTop: '50px', paddingBottom: '50px' }}>
       <h1 className="mb-3">Expense List</h1>
       <Link to="/expense/new">
       <button type="button" className="btn" style={{ color: 'white', backgroundColor: '#e76e50' , marginTop: '20px' }}>Add New Expense</button>
       </Link>
-      <div className="card mx-auto" style={{ maxWidth: '800px' , marginTop: '20px'}}>
+      <div className="card mx-auto" style={{ maxWidth: '800px' , backgroundColor: '#82c4be', marginTop: '20px'}}>
       <table className="table">
         <thead>
           <tr>

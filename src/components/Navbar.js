@@ -14,34 +14,42 @@ function NavBar() {
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="mr-auto">
         {isLoggedIn && (
-          <Nav className="mr-auto">
+          <>
             <LinkContainer to="/dashboard">
               <Nav.Link>Dashboard</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/income">
-              <Nav.Link>Incomes</Nav.Link>
+              <Nav.Link>Income</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/expense">
-              <Nav.Link>Expenses</Nav.Link>
+              <Nav.Link>Expense</Nav.Link>
             </LinkContainer>
+            </>
+        )}
+        </Nav>
+
+        <Nav className="ml-auto">
+        {isLoggedIn ? (
+          <>
+            
             <LinkContainer to="/profile">
               <Nav.Link>Profile</Nav.Link>
             </LinkContainer>
             <Nav.Link onClick={logOutUser}>Logout</Nav.Link>
-          </Nav>
-        )}
-
-        {!isLoggedIn && (
-          <Nav className="mr-auto">
+          </>
+        ) :(
+         <>
             <LinkContainer to="/auth/signup">
               <Nav.Link>Sign Up</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/auth/login">
               <Nav.Link>Login</Nav.Link>
             </LinkContainer>
-          </Nav>
+          </>
         )}
+        </Nav>
         
       </Navbar.Collapse>
     </Navbar>

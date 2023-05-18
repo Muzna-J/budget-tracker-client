@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #ecf5f9;
 }
 
 .App-logo {
@@ -38,14 +39,3 @@
   }
 }
 
-.card-income {
-  background-color: #c3e6cb; /* You can replace this with any color you like */
-}
-
-.card-expense {
-  background-color: #f5c6cb; /* You can replace this with any color you like */
-}
-
-.card-balance {
-  background-color: #ffeeba; /* You can replace this with any color you like */
-}

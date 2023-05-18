@@ -306,10 +306,11 @@ function Profile() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 56px)' }}>
-      <Card style={{ width: '30rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 56px)', paddingTop: '50px' }}>
+    <h1 className="mb-3" style={{marginBottom: '50px'}}>Welcome to your profile</h1>
+      <Card style={{ width: '30rem', backgroundColor:' #82c4be', marginTop: '20px' }}>
         <Card.Body>
-          <Card.Title>Welcome to your profile</Card.Title>
+          {/* <Card.Title>Welcome to your profile</Card.Title> */}
           {editing ? (
             <Form onSubmit={handleSubmit}>
               <Form.Group>
