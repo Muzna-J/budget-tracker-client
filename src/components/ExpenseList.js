@@ -127,7 +127,7 @@ function ExpenseList() {
 
   return (
     <div className="container" style={{ paddingTop: '50px', paddingBottom: '50px', minWidth: '60%' /*width: '40%'*/  }}  > 
-      <h2 className="mb-3">Expense List</h2>
+      <h1 className="mb-3">Expense List</h1>
 
       <button
         type="button"
