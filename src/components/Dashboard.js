@@ -94,16 +94,17 @@ function Dashboard() {
     
         ],
         borderWidth: 1,
-        datalabels: {
-          formatter: (value, ctx) => {
-            const percentage = ((value / ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0)) * 100).toFixed(2);
-            return `${percentage}%`;
-          },
-          color: 'black',
+        formatter: (value, ctx) => {
+          let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+          if(sum === 0) return '0%';
+          const percentage = ((value / sum) * 100).toFixed(2);
+          return `${percentage}%`;
         },
+        color: 'black',
       },
-    ],
-  };
+      
+  
+  ]};
 
   // Chart options
   const chartOptions = {
