@@ -62,7 +62,8 @@ function Dashboard() {
     }
 
     setBalance(totalIncome - totalExpense);
-  }, [incomes, expenses])
+  }, [incomes, expenses, totalIncome, totalExpense]); // Added missing dependencies
+
 
 
 
