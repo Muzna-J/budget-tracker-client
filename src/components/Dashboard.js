@@ -21,7 +21,6 @@ function Dashboard() {
 
   Chart.register(ArcElement);
 
-
   useEffect(() => {
     const fetchIncomeAndExpense = async () => {
       const authToken = localStorage.getItem('authToken');
@@ -46,30 +45,27 @@ function Dashboard() {
       }
     };
 
-
     fetchIncomeAndExpense();
   }, [user]);
 
-  
   useEffect(() => {
-    let totalIncome = 0;
-    let totalExpense = 0;
-    let balance = 0;
+      let totalIncome = 0;
+      let totalExpense = 0;
 
-    if (incomes.length > 0) {
-        totalIncome = incomes.reduce((total, income) => total + income.amount, 0);
-    }
-
-    if (expenses.length > 0) {
-        totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0);
-    }
-
-    balance = totalIncome - totalExpense;
-
-    setTotalIncome(totalIncome);
-    setTotalExpense(totalExpense);
-    setBalance(balance);
-  }, [incomes, expenses, totalIncome, totalExpense]);
+      if (Array.isArray(incomes) && incomes.length > 0) {
+          totalIncome = incomes.reduce((total, income) => total + income.amount, 0);
+      }
+  
+      if (Array.isArray(expenses) && expenses.length > 0) {
+          totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0);
+      }
+  
+      const balance = totalIncome - totalExpense;
+  
+      setTotalIncome(totalIncome);
+      setTotalExpense(totalExpense);
+      setBalance(balance);
+  }, [incomes, expenses]); //, totalIncome, totalExpense]);
 
 
 
