@@ -31,7 +31,11 @@ function ExpenseList() {
         },
       });
 
-      setExpenses(response.data);
+      if (Array.isArray(response.data)) {
+        setExpenses(response.data);
+      } else {
+        console.log("Error: Expected array but received:", response.data);
+      }    
     } catch (error) {
       console.error(error);
     }
@@ -150,7 +154,7 @@ function ExpenseList() {
             </tr>
           </thead>
           <tbody>
-            {expenses.map((expense) => (
+          {Array.isArray(expenses) && expenses.map(expense => (
               <tr key={expense._id}>
                 <td>{expense.category}</td>
                 <td>{expense.amount}</td>

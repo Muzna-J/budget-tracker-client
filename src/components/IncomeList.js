@@ -33,6 +33,9 @@ function IncomeList() {
       if (response.status === 200 && Array.isArray(response.data)) {
         setIncomes(response.data);
     }
+    else {
+      console.log("Error: Expected array but received:", response.data);
+    }
         } catch (error) {
       console.error(error);
     }
