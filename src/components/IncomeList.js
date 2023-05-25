@@ -30,8 +30,10 @@ function IncomeList() {
         },
       });
 
-      setIncomes(response.data);
-    } catch (error) {
+      if (response.status === 200 && Array.isArray(response.data)) {
+        setIncomes(response.data);
+    }
+        } catch (error) {
       console.error(error);
     }
   };
@@ -140,7 +142,7 @@ function IncomeList() {
             </tr>
           </thead>
           <tbody>
-            {incomes.map(income => (
+          {Array.isArray(incomes) && incomes.map(income => (
               <tr key={income._id}>
                 <td>{income.category}</td>
                 <td>{income.amount}</td>
